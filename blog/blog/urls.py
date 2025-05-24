@@ -22,4 +22,5 @@ urlpatterns = [
     # Путь к заглавной странице
     path('', include('mainpage.urls')),
     # Пути к другим страницам
+    path('article/', include('article.urls')),
 ]
