@@ -23,3 +23,14 @@ def posts(request, **kwargs):
         'article/feed.html',
         context
     )
+
+def publish(request):
+    print(request.GET)
+    if request.GET:
+        models.Article(
+            title=request.GET['header'],
+            text=request.GET['text'],
+        ).save()
+    return render(
+        request,
+        'article/new.html')
