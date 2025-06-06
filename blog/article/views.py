@@ -24,8 +24,13 @@ def posts(request, **kwargs):
         context
     )
 
+from . import forms
 def publish(request):
     print(request.GET)
+    context = {
+        'new_blog_post_form': 
+            forms.BlogPostForm()
+    }
     if request.GET:
         models.Article(
             title=request.GET['header'],
@@ -33,4 +38,5 @@ def publish(request):
         ).save()
     return render(
         request,
-        'article/new.html')
+        'article/new.html',
+        context)
