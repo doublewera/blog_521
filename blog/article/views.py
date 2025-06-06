@@ -25,17 +25,17 @@ def posts(request, **kwargs):
     )
 
 from . import forms
+from django.contrib.auth.decorators import login_required
+@login_required(login_url='/login/')
 def publish(request):
-    print(request.GET)
+    form = forms.BlogPostForm(request.POST)
     context = {
-        'new_blog_post_form': 
-            forms.BlogPostForm()
+        'new_blog_post_form': form
     }
-    if request.GET:
-        models.Article(
-            title=request.GET['header'],
-            text=request.GET['text'],
-        ).save()
+    if request.method == 'POST':
+        if form.is_valid():
+            print(form.cleaned_data)
+            form.save()
     return render(
         request,
         'article/new.html',
