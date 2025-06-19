@@ -1,5 +1,6 @@
 <div>
     <a href={% url 'mainpage' %}>Главная</a>
+    <a href={% url 'save_articles' %}>Создать запись</a>
     <a href={% url 'blogpost' 1 %}>Статья 1</a>
     {% if user.is_authenticated %}
     <form id="logout_form" method="post" action={% url 'logout' %}>
