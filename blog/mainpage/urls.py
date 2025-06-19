@@ -10,7 +10,8 @@ urlpatterns = [
             template_name='user/login.html'),   # шаблон
         name='login'),                          # {% url name %}
     path('logout/',
-         auth_views.LogoutView.as_view(
-         next_page='/'),
-         name='logout'),
+        auth_views.LogoutView.as_view(
+        next_page='/'),
+        name='logout'),
+    path('register/', views.register, name='register'),
 ]
