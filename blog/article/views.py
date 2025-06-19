@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from . import models
 from datetime import datetime
 
@@ -35,7 +35,10 @@ def publish(request):
     if request.method == 'POST':
         if form.is_valid():
             print(form.cleaned_data)
-            form.save()
+            new_article = form.save(commit=False)
+            new_article.user = request.user
+            new_article.save()
+            return redirect('blogpost', uid=request.user.id)
     return render(
         request,
         'article/new.html',
